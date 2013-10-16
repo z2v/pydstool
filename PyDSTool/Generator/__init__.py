@@ -18,6 +18,7 @@ from .LookupTable import *
 from .InterpolateTable import *
 from .ExtrapolateTable import *
 from .MapSystem import *
+from .Lsodar_ODEsystem import *
 
 
 def findGenSubClasses(superclass):
