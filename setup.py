@@ -23,6 +23,7 @@ python setup.py test  - Run test suite
 from setuptools import setup, os, find_packages
 from setuptools.command.test import test as TestCommand
 from setuptools import Command
+from numpy.distutils.core import setup
 import sys
 
 MAJOR = 0
@@ -75,6 +76,15 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 
+def configuration(parent_package='', top_path=None):
+    from numpy.distutils.misc_util import Configuration
+
+    config = Configuration(None, parent_package, top_path)
+    config.set_options(quiet=False, delegate_options_to_subpackages=True)
+
+    config.add_subpackage('PyDSTool')
+    return config
+
 setup(
     name="PyDSTool",
     version=__version__,
@@ -117,4 +127,5 @@ setup(
         "Operating System :: POSIX :: BSD :: FreeBSD",
         "Operating System :: POSIX :: Linux",
     ],
+    configuration=configuration
 )

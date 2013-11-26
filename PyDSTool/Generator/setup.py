@@ -7,7 +7,7 @@ from os.path import join, exists
 def configuration(parent_package='', top_path=None):
     from numpy.distutils.misc_util import Configuration
     from numpy.distutils.system_info import get_info
-    config = Configuration('', parent_package, top_path)
+    config = Configuration('Generator', parent_package, top_path)
 
     blas_opt = get_info('blas_opt', notfound_action=2)
 
