@@ -40,7 +40,10 @@ lsodar
 
 import warnings
 
-from scipy.integrate._ode import IntegratorBase
+try:
+    from scipy.integrate._ode import IntegratorBase
+except ImportError:
+    from scipy.integrate.ode import IntegratorBase
 from numpy import zeros, int32
 
 import _lsodar
