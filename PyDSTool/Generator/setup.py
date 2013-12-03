@@ -19,6 +19,7 @@ def configuration(parent_package='', top_path=None):
 
     # Extra complier args
     extra_args = [
+        '-w',
         '-march=native',
         '-mtune=native',
         '-ftree-vectorize'
