@@ -46,6 +46,8 @@ except ImportError:
     from scipy.integrate.ode import IntegratorBase
 from numpy import zeros, int32
 
+from PyDSTool.Generator import ODEsystem as ODEsystem
+from baseclasses import theGenSpecHelper
 import _lsodar
 
 
@@ -237,11 +239,10 @@ class lsodar(IntegratorBase):
         }
 
 
-class Lsodar_ODEsystem():
+class Lsodar_ODEsystem(ODEsystem):
 
     def __init__(self, dsargs):
-        self.pars = dsargs['pars']
-        self.defined = False
+        super(Lsodar_ODEsystem, self).__init__(dsargs)
 
     def compute(self, name):
         self.defined = True
@@ -249,3 +250,5 @@ class Lsodar_ODEsystem():
 
 if lsodar.runner is not None:
     IntegratorBase.integrator_classes.append(lsodar)
+
+theGenSpecHelper.add(Lsodar_ODEsystem, {}, 'python')
