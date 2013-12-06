@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import, print_function
+
 from numpy import linspace
 import pytest
 
 from PyDSTool.Generator import lsodar, Lsodar_ODEsystem, ODEsystem
-
-from samples import oscillator
+from PyDSTool.Generator.tests.samples import oscillator
 
 
 def test_smoke():
