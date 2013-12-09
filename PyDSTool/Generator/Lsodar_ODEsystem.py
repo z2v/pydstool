@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import, print_function
+
 from PyDSTool import Trajectory, Variable
 from PyDSTool.common import interp1d
 from PyDSTool.Generator import ODEsystem as ODEsystem
-from baseclasses import theGenSpecHelper
-from lsodar import lsodar
+from PyDSTool.Generator.baseclasses import theGenSpecHelper
+from PyDSTool.Generator.lsodar import lsodar
 
 
 class Lsodar_ODEsystem(ODEsystem):
