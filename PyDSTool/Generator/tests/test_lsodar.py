@@ -17,14 +17,13 @@ def test_smoke():
 
 
 @pytest.fixture
-def dsargs():
+def ode():
     t = linspace(0.0, 1.0, 25)
     ds, _ = oscillator(t)
-    return ds
+    return Lsodar_ODEsystem(ds)
 
 
-def test_lsodar_inherits_odesystem(dsargs):
-    ode = Lsodar_ODEsystem(dsargs)
+def test_lsodar_inherits_odesystem(ode):
     assert isinstance(ode, ODEsystem)
     assert 'x' in ode.variables
     assert 'xdot' in ode.variables
@@ -32,8 +31,7 @@ def test_lsodar_inherits_odesystem(dsargs):
     assert 'xdot' in ode.funcspec.vars
 
 
-def test_lsodar_compute_returns_trajectory(dsargs):
-    ode = Lsodar_ODEsystem(dsargs)
+def test_lsodar_compute_returns_trajectory(ode):
     traj = ode.compute('traj')
 
     assert isinstance(traj, Trajectory)
@@ -44,9 +42,7 @@ def test_lsodar_compute_returns_trajectory(dsargs):
     assert_almost_equal(ode.tdomain[1], traj.indepdomain[1])
 
 
-def test_lsodar_compute_change_defined_status(dsargs):
-    ode = Lsodar_ODEsystem(dsargs)
-
+def test_lsodar_compute_change_defined_status(ode):
     assert not ode.defined
     _ = ode.compute('_')
     assert ode.defined
