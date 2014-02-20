@@ -42,3 +42,11 @@ def test_lsodar_compute_returns_trajectory(dsargs):
     assert 'xdot' in traj(0.0)
     assert_almost_equal(ode.tdomain[0], traj.indepdomain[0])
     assert_almost_equal(ode.tdomain[1], traj.indepdomain[1])
+
+
+def test_lsodar_compute_change_defined_status(dsargs):
+    ode = Lsodar_ODEsystem(dsargs)
+
+    assert not ode.defined
+    _ = ode.compute('_')
+    assert ode.defined
