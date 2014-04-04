@@ -9,7 +9,7 @@ import pytest
 
 from PyDSTool import Interval, Trajectory
 from PyDSTool.Generator import lsodar, Lsodar_ODEsystem, ODEsystem
-from PyDSTool.Generator.tests.samples import oscillator
+from .test_oscillator import oscillator
 
 
 def test_smoke():
