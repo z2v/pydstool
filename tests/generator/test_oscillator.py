@@ -24,6 +24,7 @@ from PyDSTool.Generator import (
     Vode_ODEsystem,
     Radau_ODEsystem,
     Dopri_ODEsystem,
+    Lsodar_ODEsystem,
 )
 
 from .helpers import clean_files
@@ -71,6 +72,11 @@ def test_radau():
 
 def test_dopri():
     _check_generator(Dopri_ODEsystem)
+
+
+@pytest.mark.xfail(reason='WIP')
+def test_lsodar():
+    _check_generator(Lsodar_ODEsystem)
 
 
 def _check_generator(generator):

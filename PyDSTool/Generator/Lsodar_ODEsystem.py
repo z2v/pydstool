@@ -237,5 +237,15 @@ class lsodar(IntegratorBase):
         }
 
 
+class Lsodar_ODEsystem():
+
+    def __init__(self, dsargs):
+        self.pars = dsargs['pars']
+        self.defined = False
+
+    def compute(self, name):
+        self.defined = True
+
+
 if lsodar.runner is not None:
     IntegratorBase.integrator_classes.append(lsodar)
