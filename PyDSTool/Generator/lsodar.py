@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import division, absolute_import, print_function
+
 """
 lsodar
 ~~~~~~
@@ -49,7 +51,7 @@ except ImportError:
     from scipy.integrate.ode import IntegratorBase
 from numpy import zeros, int32
 
-import _lsodar
+from . import _lsodar
 
 class lsodar(IntegratorBase):
 
