@@ -18,3 +18,5 @@ PyDSTool.egg-info/
 .project
 .pydevproject
 .settings
+build/
+*.so
