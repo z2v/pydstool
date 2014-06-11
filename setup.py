@@ -94,6 +94,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "six",
+        "cython",
         "scipy>=0.9",
         "numpy>=1.6"
     ],
