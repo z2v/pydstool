@@ -1,21 +1,31 @@
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
-from libc.math cimport sin
 
 cimport cdopri
-import numpy as np
-cimport numpy as np
+
+
+cdef object f
 
 
 cdef void c_vfield(unsigned n, double x, double* y_, double* p_, double* dydx):
     cdef int i
-    for i from 0<= i < n:
-        dydx[0] = y_[1]
-        dydx[1] = -y_[0]
+
+    y = []
+    for i from 0 <= i < n:
+        y.append(y_[i])
+
+    global f
+    yy = f(x, y)
+
+    for i from 0 <= i < n:
+        dydx[i] = yy[i]
     return
 
 
 cdef class dopri(object):
+
     cdef double* y
+    cdef int status
+    cdef double xend
 
     def __cinit__(self):
         self.y = <double*> PyMem_Malloc(sizeof(double))
@@ -26,25 +36,30 @@ cdef class dopri(object):
         PyMem_Free(self.y)
 
     def __init__(self):
-        pass
+        self.status = 0
+        self.xend = 0
 
-    def Run(self, rhs):
-        cdef int dim = 2
+    def Run(self, rhs, y0, tspan=[0.0, 1.0]):
+        cdef int dim = len(y0)
         self.y = <double*> PyMem_Realloc(self.y, dim * sizeof(double))
         if not self.y:
             raise MemoryError()
 
-        self.y[0] = self.y[1] = 1.0
+        for i, v in enumerate(y0):
+            self.y[i] = v
+
+        global f
+        f = rhs
 
         cdef double rtoler = 1e-8
         cdef double atoler = 1e-6
-        status = cdopri.dop853(
+        self.status = cdopri.dop853(
             dim, # n
             c_vfield, #fcn
-            0.0, #x
+            tspan[0], #x
             self.y, #y
             NULL,# pars
-            1.0, #xend
+            tspan[-1], #xend
             &rtoler,
             &atoler,
             0, # itoler
@@ -69,7 +84,13 @@ cdef class dopri(object):
             NULL, #magbound
             NULL #adjust_h
         )
-        print("status: {0}, result: {1}".format(status, cdopri.xRead()))
+        self.xend = cdopri.xRead()
 
+        yend = []
         for i from 0 <= i < dim:
-            print(self.y[i])
+            yend.append(self.y[i])
+
+        return (self.xend, yend)
+
+    def successful(self):
+        return self.status == 1
