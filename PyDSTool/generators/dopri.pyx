@@ -26,6 +26,7 @@ cdef class dopri(object):
     cdef double* y
     cdef int status
     cdef double xend
+    cdef object algparams
 
     def __cinit__(self):
         self.y = <double*> PyMem_Malloc(sizeof(double))
@@ -39,7 +40,26 @@ cdef class dopri(object):
         self.status = 0
         self.xend = 0
 
-    def Run(self, rhs, y0, tspan=[0.0, 1.0]):
+        self.algparams = {
+            'rtol': 1e-8,
+            'atol': 1e-6,
+
+            # by default set to 0, so default values will be used
+            'uround': 0.0,
+            'safety': 0.0,
+            'fac1': 0.0,
+            'fac2': 0.0,
+            'beta': 0.0,
+            'max_step': 0.0,
+            'init_step': 0.0,
+            'maxsteps': 0.0,
+
+            # not available outside
+            'meth': 1,
+            'nstiff': 0,
+        }
+
+    def Run(self, rhs, y0, tspan=[0.0, 1.0], **kwargs):
         cdef int dim = len(y0)
         self.y = <double*> PyMem_Realloc(self.y, dim * sizeof(double))
         if not self.y:
@@ -51,8 +71,8 @@ cdef class dopri(object):
         global f
         f = rhs
 
-        cdef double rtoler = 1e-8
-        cdef double atoler = 1e-6
+        cdef double rtoler = kwargs.get('rtol', self.algparams['rtol'])
+        cdef double atoler = kwargs.get('atol', self.algparams['atol'])
         self.status = cdopri.dop853(
             dim, # n
             c_vfield, #fcn
@@ -66,17 +86,17 @@ cdef class dopri(object):
             NULL, # solout
             0, # iout
             NULL, # fileout
-            0, # uround
-            0, # safe,
-            0, # fac1
-            0, #fac2,
-            0, # beta,
-            0, #hmax,
-            0, #h,
-            0, #nmax,
-            1, #meth
-            0, #nstiff
-            0, #nrdens
+            kwargs.get('uround', self.algparams['uround']), # uround
+            kwargs.get('safety', self.algparams['safety']), # safe,
+            kwargs.get('fac1', self.algparams['fac1']), # fac1
+            kwargs.get('fac2', self.algparams['fac2']), #fac2,
+            kwargs.get('beta', self.algparams['beta']), # beta,
+            kwargs.get('max_step', self.algparams['max_step']), #hmax,
+            kwargs.get('init_step', self.algparams['init_step']), #h,
+            kwargs.get('maxsteps', self.algparams['maxsteps']), #nmax,
+            self.algparams['meth'], #meth
+            self.algparams['nstiff'], #nstiff
+            dim, #nrdens
             NULL, #icont
             0, #licont
             0, #boundscheck
