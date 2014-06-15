@@ -33,3 +33,8 @@ def test_cdopri_smoke():
     assert integrator.successful()
     assert_almost_equal(tend, x)
     assert_array_almost_equal(expected(tend), y)
+
+    stats_info = integrator.get_stats_info()
+    assert stats_info['errorStatus'] == 1
+    assert stats_info['last_step'] > 0
+    assert stats_info['num_reject'] + stats_info['num_accept'] == stats_info['num_steps']

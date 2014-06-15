@@ -114,3 +114,13 @@ cdef class dopri(object):
 
     def successful(self):
         return self.status == 1
+
+    def get_stats_info(self):
+        return {
+            'last_step': cdopri.hRead(),
+            'num_steps': cdopri.nstepRead(),
+            'num_accept': cdopri.naccptRead(),
+            'num_reject': cdopri.nrejctRead(),
+            'num_fcns': cdopri.nfcnRead(),
+            'errorStatus': self.status,
+        }

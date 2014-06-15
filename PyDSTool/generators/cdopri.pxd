@@ -37,3 +37,10 @@ cdef extern from "dop853.h":
      )
 
     double xRead()
+
+    # statistical data
+    long nfcnRead()
+    long nstepRead()
+    long naccptRead()
+    long nrejctRead()
+    double hRead()
