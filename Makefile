@@ -49,6 +49,8 @@ clean:
 	-@find . -path ./.tox -prune -o -type f -name "*.so" -exec rm -f {} \;
 	-@find . -path ./.tox -prune -o -type f -name "*module.c" -exec rm -rf {} \;
 	-@find . \( -name "temp*.pkl" -o -name "fort.*" -o -name "tvals.dat" -o -name "varvals.dat" -o -name "vanderPol.dat" \) -delete
+	-@find . -name "dopri.c" -delete
+	-@find . -name "*.core" -delete
 
 distclean: clean
 	@python setup.py clean --all
