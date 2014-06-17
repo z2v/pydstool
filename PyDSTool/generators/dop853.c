@@ -165,7 +165,7 @@ static int dopcor (unsigned n, FcnEqDiff fcn, double x, double* y, double *pars,
 		   int boundmaxsteps, double *magbound, StepAdjuster adjust_h)
 {
   double   facold, expo1, fac, facc1, facc2, fac11, posneg, xph;
-  double   atoli, rtoli, hlamb, err, sk, hnew, yd0, ydiff, bspl;
+  double   atoli, rtoli, hlamb, err, sk, hnew, ydiff, bspl;
   double   stnum, stden, sqr, err2, erri, deno;
   int      iasti, iord, irtrn, reject, last, nonsti;
   unsigned i, j;
@@ -372,6 +372,7 @@ static int dopcor (unsigned n, FcnEqDiff fcn, double x, double* y, double *pars,
   last  = 0;
   hlamb = 0.0;
   iasti = 0;
+  nonsti = 0;
   fcn (n, x, y, pars, k1);
   hmax = fabs (hmax);
   iord = 8;
@@ -545,10 +546,9 @@ static int dopcor (unsigned n, FcnEqDiff fcn, double x, double* y, double *pars,
 	  nonsti = 0;
 	  iasti++;
 	  if (iasti == 15)
-	    if (fileout)
-	      fprintf (fileout, "The problem seems to become stiff at x = %.16e\r\n", x);
-	    else
 	    {
+	      if (fileout)
+	        fprintf (fileout, "The problem seems to become stiff at x = %.16e\r\n", x);
 	      xout = x;
 	      hout = h;
 	      return -4;
@@ -663,7 +663,7 @@ static int dopcor (unsigned n, FcnEqDiff fcn, double x, double* y, double *pars,
 	for( i = 0; i < n; i++ ) {
 	  if( fabs(y[i]) > magbound[i] ) {
 	    if(fileout)
-	      fprintf(fileout,"The solution exceeded magbound %g in component %d at x=%.16\r\n", magbound[i], i, x);
+	      fprintf(fileout,"The solution exceeded magbound %g in component %d at x=%.16e\r\n", magbound[i], i, x);
 	    return -8;
 	  }
 	}
@@ -674,7 +674,7 @@ static int dopcor (unsigned n, FcnEqDiff fcn, double x, double* y, double *pars,
 	for( i = 0; i < n; i++ ) {
 	  if( fabs(y[i]) > magbound[i] ) {
 	    if(fileout)
-	      fprintf(fileout,"The solution exceeded magbound %g in component %d at x=%.16\r\n", magbound[i], i, x);
+	      fprintf(fileout,"The solution exceeded magbound %g in component %d at x=%.16e\r\n", magbound[i], i, x);
 	    return -8;
 	  }
 	}
@@ -987,7 +987,7 @@ int dop853
 /* dense output function */
 double contd8 (unsigned ii, double x)
 {
-  unsigned i, j;
+  unsigned i;
   double   s, s1;
 
   i = UINT_MAX;
