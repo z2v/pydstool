@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
+
 from _distfix import *
 
 def configuration(parent_package='', top_path=None):
@@ -8,11 +10,12 @@ def configuration(parent_package='', top_path=None):
     from numpy.distutils.system_info import get_info
     config = Configuration('generators', parent_package, top_path)
 
-    config.add_include_dirs('.')
+    dop853_dir = 'dop853'
+    config.add_include_dirs(dop853_dir)
     config.add_library(
         'dop853',
-        sources=['dop853.c'],
-        depends=['dop853.h'])
+        sources=[os.path.join(dop853_dir, 'dop853.c')],
+        depends=[os.path.join(dop853_dir, 'dop853.h')])
 
     config.add_extension(
         'dopri',
