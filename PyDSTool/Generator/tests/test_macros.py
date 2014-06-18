@@ -3,6 +3,7 @@
 
 from __future__ import absolute_import, print_function
 
+import platform
 import sys
 import pytest
 from numpy import array, pi, allclose
@@ -46,14 +47,14 @@ def test_macros_vode(fnspecs):
     _run_check_macros_3(Vode_ODEsystem, fnspecs)
 
 
-@pytest.mark.skipif("architecture() == 64 and int(sys.version[0]) > 2")
+@pytest.mark.skipif("architecture() == 64 and (int(sys.version[0]) > 2 or platform.system() == 'FreeBSD')")
 def test_macros_dopri(fnspecs):
 
     _run_check_macros_1(Dopri_ODEsystem, fnspecs)
     _run_check_macros_2(Dopri_ODEsystem, fnspecs)
 
 
-@pytest.mark.skipif("architecture() == 64 and int(sys.version[0]) > 2")
+@pytest.mark.skipif("architecture() == 64 and (int(sys.version[0]) > 2 or platform.system() == 'FreeBSD')")
 def test_macros_radau(fnspecs):
 
     _run_check_macros_1(Radau_ODEsystem, fnspecs)
