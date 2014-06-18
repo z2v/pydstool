@@ -22,6 +22,10 @@ def configuration(parent_package='', top_path=None):
         sources=['dopri.pyx'],
         libraries=['dop853'])
 
+    config.add_extension(
+        'vfield',
+        sources=['vfield.pyx'])
+
     return config
 
 

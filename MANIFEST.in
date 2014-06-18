@@ -1,6 +1,6 @@
 include *.txt *.rst
 recursive-include PyDSTool/integrator *.f *.c *.h *.i
-recursive-include PyDSTool/generators *.pyx *.pxd *.c *.h
+recursive-include PyDSTool/generators *.pyx *.pxd *.pxi *.c *.h
 recursive-include PyDSTool/PyCont *.txt Makefile
 recursive-include PyDSTool/PyCont/auto/cmds *.csh *.sh
 recursive-include PyDSTool/PyCont/auto/demos/ab *.c Makefile

@@ -1,20 +1,24 @@
+include 'generators.pxi'
+
 from cpython.mem cimport PyMem_Malloc, PyMem_Realloc, PyMem_Free
 
 cimport cdopri
+cimport vfield
 
-
-cdef object f
+cdef vfield.VField f
 
 
 cdef void c_vfield(unsigned n, double x, double* y_, double* p_, double* dydx):
     cdef int i
+    cdef np.ndarray[DTYPE, ndim=1, negative_indices=False, mode='c'] y
 
-    y = []
+    y = np.zeros((n, ))
+
     for i from 0 <= i < n:
-        y.append(y_[i])
+        y[i] = y_[i]
 
     global f
-    yy = f(x, y)
+    yy = f.rhs(x, y)
 
     for i from 0 <= i < n:
         dydx[i] = yy[i]
@@ -59,7 +63,7 @@ cdef class dopri(object):
             'nstiff': 0,
         }
 
-    def Run(self, rhs, y0, tspan=[0.0, 1.0], **kwargs):
+    def Run(self, vfield.VField vf, y0, tspan=[0.0, 1.0], **kwargs):
         cdef int dim = len(y0)
         self.y = <double*> PyMem_Realloc(self.y, dim * sizeof(double))
         if not self.y:
@@ -69,7 +73,7 @@ cdef class dopri(object):
             self.y[i] = v
 
         global f
-        f = rhs
+        f = vf
 
         cdef double rtoler = kwargs.get('rtol', self.algparams['rtol'])
         cdef double atoler = kwargs.get('atol', self.algparams['atol'])
