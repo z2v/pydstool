@@ -26,6 +26,7 @@ Benchmark results:
 * FreeBSD 11.0-CURRENT amd64 (Virtualbox)
                               |  cdopri  |  dop853  |  dopri5  |   vode   |  lsoda
     --------------------------------------------------------------------------------
+    Raw C implementation      |   2.21ms |          |          |          |
     python_callback           | 233.39ms | 215.29ms | 601.84ms | 269.93ms | 419.79ms
     cython_callback_method    |  77.60ms |  43.31ms | 172.23ms |  92.57ms | 135.81ms
     cython_callback_alias     |  82.92ms |  53.01ms | 159.38ms |  91.94ms | 141.81ms
