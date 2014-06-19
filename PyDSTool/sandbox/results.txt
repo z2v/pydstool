@@ -1,11 +1,23 @@
 Benchmark results:
 
-Linux 3.13.0-29-generic i686 GNU/Linux (Ubuntu 14.04):
-                          |  cdopri  |  dop853  |  dopri5  |   vode   |  lsoda
---------------------------------------------------------------------------------
-python_callback           | 134.00ms | 120.39ms | 354.88ms | 181.41ms | 266.27ms
-cython_callback_method    |  41.83ms |  24.05ms |  71.32ms |  54.53ms |  76.58ms
-cython_callback_alias     |  40.95ms |  24.08ms |  71.95ms |  55.15ms |  75.40ms
-cython_callback_function  |  41.78ms |  23.70ms |  70.78ms |  54.69ms |  73.75ms
---------------------------------------------------------------------------------
-best time of 5 tries
+
+* Linux 3.13.0-29-generic i686 GNU/Linux (Ubuntu 14.04)
+                              |  cdopri  |  dop853  |  dopri5  |   vode   |  lsoda
+    --------------------------------------------------------------------------------
+    python_callback           | 134.00ms | 120.39ms | 354.88ms | 181.41ms | 266.27ms
+    cython_callback_method    |  41.83ms |  24.05ms |  71.32ms |  54.53ms |  76.58ms
+    cython_callback_alias     |  40.95ms |  24.08ms |  71.95ms |  55.15ms |  75.40ms
+    cython_callback_function  |  41.78ms |  23.70ms |  70.78ms |  54.69ms |  73.75ms
+    --------------------------------------------------------------------------------
+    best time of 5 tries
+
+
+* FreeBSD 10.0-RELEASE-p4 i386 (VirtualBox)
+                              |  cdopri  |  dop853  |  dopri5  |   vode   |  lsoda
+    --------------------------------------------------------------------------------
+    python_callback           | 271.16ms | 247.13ms | 723.61ms | 332.64ms | 539.30ms
+    cython_callback_method    |  67.77ms |  43.35ms | 130.37ms |  66.67ms | 104.82ms
+    cython_callback_alias     |  71.72ms |  44.22ms | 129.75ms |  87.47ms | 129.62ms
+    cython_callback_function  |  68.03ms |  40.24ms | 126.69ms |  85.48ms | 124.65ms
+    --------------------------------------------------------------------------------
+    best time of 5 tries
