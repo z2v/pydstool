@@ -6,8 +6,8 @@ from __future__ import print_function
 from numpy import sqrt, cos, sin, asarray
 from numpy.testing import assert_almost_equal, assert_array_almost_equal
 
-from PyDSTool.generators import dopri
-from PyDSTool.generators import vfield
+from PyDSTool.sandbox import dopri
+from PyDSTool.sandbox import vfield
 
 
 k = 4.0
