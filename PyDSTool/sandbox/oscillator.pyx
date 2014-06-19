@@ -21,7 +21,7 @@ cdef class Oscillator:
 
 
 
-# ==== As an alias to bject method
+# ==== As an alias to object method
 cdef Oscillator O = Oscillator()
 
 cpdef np.ndarray oscillator(double t, np.ndarray y, tuple pars=()):

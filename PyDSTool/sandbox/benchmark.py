@@ -28,19 +28,19 @@ def oscillator_py(t, y, pars=None):
 
 
 def python_callback():
-    integrator.run(oscillator_py, lambda t, y: None, y0, 0.0, tend, (None, ), (None, ))
+    integrator.run(oscillator_py, lambda t, y: None, y0, 0.0, tend, (), ())
 
 
 def cython_callback_method():
-    integrator.run(Oscillator().rhs, lambda t, y: None, y0, 0.0, tend, (None, ), (None, ))
+    integrator.run(Oscillator().rhs, lambda t, y: None, y0, 0.0, tend, (), ())
 
 
 def cython_callback_alias():
-    integrator.run(oscillator, lambda t, y: None, y0, 0.0, tend, (None, ), (None, ))
+    integrator.run(oscillator, lambda t, y: None, y0, 0.0, tend, (), ())
 
 
 def cython_callback_function():
-    integrator.run(oscillator_fun, lambda t, y: None, y0, 0.0, tend, (None, ), (None, ))
+    integrator.run(oscillator_fun, lambda t, y: None, y0, 0.0, tend, (), ())
 
 
 def _format(t, fmt='{0:6.2f}{1:2s}'):
