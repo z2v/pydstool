@@ -13,6 +13,17 @@ Benchmark results:
         --------------------------------------------------------------------------------
         best time of 5 tries
 
+    * Python 3.3
+                                  |  cdopri  |  dop853  |  dopri5  |   vode   |  lsoda
+        --------------------------------------------------------------------------------
+        Raw C implementation      |   1.00ms |          |          |          |
+        python_callback           | 168.11ms | 156.48ms | 453.73ms | 216.74ms | 338.19ms
+        cython_callback_method    |  37.39ms |  23.86ms |  72.45ms |  54.37ms |  72.31ms
+        cython_callback_alias     |  37.10ms |  24.38ms |  72.31ms |  55.46ms |  72.08ms
+        cython_callback_function  |  37.63ms |  25.15ms |  70.71ms |  53.40ms |  69.79ms
+        --------------------------------------------------------------------------------
+        best time of 5 tries
+
 * FreeBSD 10.0-RELEASE-p4 i386 (VirtualBox)
     * Python 2.7
                                   |  cdopri  |  dop853  |  dopri5  |   vode   |  lsoda
