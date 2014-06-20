@@ -27,7 +27,7 @@ script:
     - python setup.py test
 
 after_success:
-    - python setup.py develop --user
+    - python setup.py install
     - cd PyDSTool/sandbox && python benchmark.py && python run.py
 
 cache: apt
