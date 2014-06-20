@@ -15,9 +15,9 @@ before_install:
     - python -c 'import struct; print(struct.calcsize("P") * 8)'
     - sudo apt-get update -qq
     - sudo apt-get install -qq liblapack-dev libatlas-dev libatlas-base-dev gfortran swig
-    - pip install --upgrade pip setuptools pytest pytest-xdist cython
-    - pip install --use-wheel six
+    - pip install --upgrade pip setuptools
     - export PIP_CMD='pip install --find-links http://wheels.astropy.org/ --find-links http://wheels2.astropy.org/ --use-wheel'
+    - $PIP_CMD six pytest pytest-xdist cython
 
 install:
     - $PIP_CMD $NUMPY_SPEC
@@ -27,7 +27,7 @@ script:
     - python setup.py test
 
 after_success:
-    - cd PyDSTool/sandbox && python benchmark.py
-    - cd PyDSTool/sandbox && python run.py
+    - python setup.py develop --user
+    - cd PyDSTool/sandbox && python benchmark.py && python run.py
 
 cache: apt
