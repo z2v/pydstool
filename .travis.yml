@@ -5,17 +5,10 @@ matrix:
           env:
             - NUMPY_SPEC='numpy<1.9'
             - SCIPY_SPEC=scipy
-            - COVERAGE="no"
         - python: 2.7
           env:
             - NUMPY_SPEC='numpy<1.9'
             - SCIPY_SPEC=scipy
-            - COVERAGE="yes"
-        - python: 2.6
-          env:
-            - NUMPY_SPEC='numpy==1.6.2'
-            - SCIPY_SPEC='scipy==0.9.0'
-            - COVERAGE="no"
 
 before_install:
     - uname -a
@@ -29,12 +22,12 @@ before_install:
 install:
     - $PIP_CMD $NUMPY_SPEC
     - $PIP_CMD $SCIPY_SPEC
-    - if [ "${COVERAGE}" == "yes" ]; then pip install coverage coveralls; fi
 
 script:
-    - if [ "${COVERAGE}" == "yes" ]; then coverage run --source=PyDSTool setup.py test -q; else python setup.py test; fi
+    - python setup.py test
 
 after_success:
-    - if [ "${COVERAGE}" == "yes" ]; then coveralls; fi
+    - cd PyDSTool/sandbox && python benchmark.py
+    - cd PyDSTool/sandbox && python run.py
 
 cache: apt
