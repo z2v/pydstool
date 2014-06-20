@@ -10,8 +10,8 @@ import subprocess
 if subprocess.call(['cc', '-O2', 'osc.c', 'dop853/dop853.c', '-lm']) == 0:
     times = []
     nfun = []
-    for j in xrange(100):
-        out = subprocess.check_output(['./a.out'])
+    for j in range(100):
+        out = subprocess.check_output(['./a.out'], universal_newlines=True)
         for l in out.split('\n'):
             if 'milliseconds' in l:
                 times.append(float(re.findall(r'\d+.\d{3}', l)[0]))
