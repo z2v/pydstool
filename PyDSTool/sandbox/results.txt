@@ -4,6 +4,7 @@ Benchmark results:
 * Linux 3.13.0-29-generic i686 GNU/Linux (Ubuntu 14.04)
                               |  cdopri  |  dop853  |  dopri5  |   vode   |  lsoda
     --------------------------------------------------------------------------------
+    Raw C implementation      |   1.00ms |          |          |          |
     python_callback           | 134.00ms | 120.39ms | 354.88ms | 181.41ms | 266.27ms
     cython_callback_method    |  41.83ms |  24.05ms |  71.32ms |  54.53ms |  76.58ms
     cython_callback_alias     |  40.95ms |  24.08ms |  71.95ms |  55.15ms |  75.40ms
