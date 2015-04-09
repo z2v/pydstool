@@ -2947,6 +2947,21 @@ def DiffStr(t, a='x'):
 
     This is Pearu's original Diff function renamed to DiffStr."""
 
+    import sympy
+
+    if isinstance(a, list):
+        x = sympy.symbols(' '.join(*a))
+    else:
+        x = sympy.symbols(a)
+    if isinstance(t, list):
+        par_diff = lambda t: str(sympy.diff(t, x))
+        return str(map(par_diff, t))
+    return str(sympy.diff(t, x))
+
+
+
+
+
     if isinstance(a, list):
 ##        s= ''.join([t, '__derivWRT__', str(a)])
 ##        r=__Diff_saved.get(s, None)
