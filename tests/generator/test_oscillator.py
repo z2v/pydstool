@@ -18,6 +18,7 @@
 from __future__ import absolute_import, print_function
 
 from numpy import linspace, allclose, array, cos, sin, sqrt
+import pytest
 
 from PyDSTool.Generator import (
     Euler_ODEsystem,
