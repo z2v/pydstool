@@ -34,7 +34,7 @@ class dopri(integrator):
                  hasJac=0, hasJacP=0, hasMass=0, extraSpace=0,
                  defaultBound=1e8):
 
-        integrator.__init__(self, rhs=rhs, phaseDim=phaseDim, paramDim=paramDim,
+        super().__init__(rhs=rhs, phaseDim=phaseDim, paramDim=paramDim,
                             nAux=nAux, nEvents=nEvents, nExtInputs=nExtInputs,
                             hasJac=hasJac, hasJacP=hasJacP, hasMass=hasMass,
                             extraSpace=extraSpace, defaultBound=defaultBound)
@@ -305,7 +305,7 @@ class Dopri_ODEsystem(ODEsystem, CompiledMixin):
 
         # delete because not covered in ODEsystem
         nobuild = kw.pop('nobuild', False)
-        ODEsystem.__init__(self, kw)
+        super().__init__(kw)
         self.diagnostics.outputStatsInfo = {
             'last_step': 'Predicted step size of the last accepted step (useful for a subsequent call to dop853).',
             'num_steps': 'Number of used steps.',
