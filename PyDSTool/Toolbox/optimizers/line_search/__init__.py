@@ -36,24 +36,24 @@ Line Searches :
     - modified the last step length with a fixed factor
 """
 
-from .simple_line_search import *
-from .hyperbolic_line_search import *
-from .damped_line_search import *
-from .backtracking_search import *
+from .simple_line_search import *           # noqa: F401
+from .hyperbolic_line_search import *       # noqa: F401
+from .damped_line_search import *           # noqa: F401
+from .backtracking_search import *          # noqa: F401
 
-from .wolfe_powell_rule import *
-from .strong_wolfe_powell_rule import *
-from .goldstein_rule import *
+from .wolfe_powell_rule import *            # noqa: F401
+from .strong_wolfe_powell_rule import *     # noqa: F401
+from .goldstein_rule import *               # noqa: F401
 
-from .golden_section import *
-from .fibonacci_section import *
-from .quadratic_interpolation import *
-from .cubic_interpolation import *
+from .golden_section import *               # noqa: F401
+from .fibonacci_section import *            # noqa: F401
+from .quadratic_interpolation import *      # noqa: F401
+from .cubic_interpolation import *          # noqa: F401
 
-from .adaptive_last_step_modifier import *
-from .fixed_last_step_modifier import *
+from .adaptive_last_step_modifier import *  # noqa: F401
+from .fixed_last_step_modifier import *     # noqa: F401
 
-from .scaled_line_search import *
+from .scaled_line_search import *           # noqa: F401
 
 line_search__all__ = ['SimpleLineSearch', 'HyperbolicLineSearch', 'DampedLineSearch', 'BacktrackingSearch',
                       'WolfePowellRule', 'StrongWolfePowellRule', 'GoldsteinRule',

@@ -37,7 +37,7 @@ attributes (among others):
 
 
 ## PyDSTool imports
-from . import Generator, Events, ModelContext
+from . import Generator, ModelContext
 from .utils import *
 from .common import *
 from .errors import *
@@ -47,15 +47,12 @@ from .Variable import *
 from .Points import *
 from .ModelSpec import *
 from .Symbolic import isMultiRef
-from .parseUtils import isHierarchicalName, NAMESEP, mapNames, symbolMapClass
+from .parseUtils import isHierarchicalName, mapNames, symbolMapClass
 
 ## Other imports
-import math, sys
-from numpy import Inf, NaN, isfinite, sign, abs, array, arange, \
-     zeros, concatenate, transpose, shape
-from numpy import sometrue, alltrue, any, all
+from numpy import Inf, NaN, isfinite, sign, abs, array
+from numpy import sometrue, alltrue
 import copy
-from time import perf_counter
 import pprint
 
 __all__ = ['Model', 'HybridModel', 'NonHybridModel',

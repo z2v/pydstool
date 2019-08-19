@@ -22,8 +22,8 @@ from .common import *
 from .errors import *
 
 ## Other imports
-from numpy import Inf, NaN, isfinite, isinf, isnan, array, sign, linspace, arange
-import re, math
+from numpy import Inf, isfinite, isinf, sign, linspace, arange
+import math
 import copy
 
 MIN_EXP = -15

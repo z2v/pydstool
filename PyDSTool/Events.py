@@ -22,8 +22,6 @@ from . import FuncSpec
 # Other imports
 import copy
 from functools import reduce
-import math
-import random
 import types
 
 import numpy

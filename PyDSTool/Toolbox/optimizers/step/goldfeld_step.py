@@ -2,9 +2,8 @@
 """
 Computes Goldfeld step for a specific function at a specific point
 """
-from numpy import pi,  dot, cos
 from numpy.linalg import solve as n_solve
-from numpy.linalg import norm, cholesky, eigvalsh
+from numpy.linalg import cholesky, eigvalsh
 
 class GoldfeldStep(object):
 
