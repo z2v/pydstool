@@ -27,7 +27,7 @@ import sys
 
 MAJOR = 0
 MINOR = 90
-MICRO = 3
+MICRO = 4
 __version__ = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
 
 
